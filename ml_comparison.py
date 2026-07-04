@@ -69,7 +69,7 @@ def load_and_preprocess(train_path, external_path):
         raise ValueError(f"临床特征缺失: {missing_clinical}")
     
     train_mask = train_df[dataset_col] == 'Training'
-    val_mask = train_df[dataset_col] == 'EV'
+    val_mask = train_df[dataset_col] == 'Test'
     
     X_train_raw = train_df.loc[train_mask, feature_cols].copy()
     y_train = (train_df.loc[train_mask, group_col] == positive_label).astype(int).values
@@ -141,7 +141,7 @@ def bootstrap_auc_diff(y_true, prob1, prob2, n_bootstrap=N_BOOTSTRAP, random_sta
 def main():
     parser = argparse.ArgumentParser(description='机器学习模型比较（含AUC差异检验）')
     parser.add_argument('--data_path', type=str, required=True,
-                        help='训练数据文件路径（含Training和EV）')
+                        help='训练数据文件路径（含Training和Test）')
     parser.add_argument('--external_path', type=str, required=True,
                         help='外部验证集文件路径')
     parser.add_argument('--transformer_result_path', type=str, required=True,
@@ -229,7 +229,7 @@ def main():
             'Model': name,
             'Disease_Type': disease_type
         })
-        val_file = os.path.join(OUTPUT_DIR, f'EV_{name}_{disease_type}_Results.txt')
+        val_file = os.path.join(OUTPUT_DIR, f'Test_{name}_{disease_type}_Results.txt')
         df_val.to_csv(val_file, sep='\t', index=False)
         print(f"保存 {name} 内部验证集预测结果到 {val_file}")
         
@@ -278,7 +278,7 @@ def main():
         'Model': name_tab,
         'Disease_Type': disease_type
     })
-    val_file = os.path.join(OUTPUT_DIR, f'EV_{name_tab}_{disease_type}_Results.txt')
+    val_file = os.path.join(OUTPUT_DIR, f'Test_{name_tab}_{disease_type}_Results.txt')
     df_val.to_csv(val_file, sep='\t', index=False)
     print(f"保存 {name_tab} 内部验证集预测结果到 {val_file}")
     
