@@ -40,7 +40,7 @@ CLINICAL_FEATURES = ['BMI', 'Age', 'Birth_history', 'IVF', 'RPL', 'PMH', 'MAP']
 # ============================================================================
 def load_and_preprocess(train_path, external_path):
     """
-    加载训练集（含 Training 和 EV）和外部验证集。
+    加载训练集（含 Training 和 Test）和外部验证集。
     自动检测疾病类型（Preterm_PE 或 Term_PE）。
     返回：
         X_train, y_train, X_val, y_val, X_test, y_test,
@@ -225,7 +225,7 @@ def main():
             'Sample_ID': val_ids,
             'Group': [positive_label if l == 1 else 'control' for l in y_val],
             'Prediction_Score': proba_val,
-            'Dataset': 'EV',
+            'Dataset': 'Test',
             'Model': name,
             'Disease_Type': disease_type
         })
@@ -274,7 +274,7 @@ def main():
         'Sample_ID': val_ids,
         'Group': [positive_label if l == 1 else 'control' for l in y_val],
         'Prediction_Score': tabnet_proba_val,
-        'Dataset': 'EV',
+        'Dataset': 'Test',
         'Model': name_tab,
         'Disease_Type': disease_type
     })
