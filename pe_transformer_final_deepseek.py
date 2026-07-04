@@ -1418,7 +1418,7 @@ def output_train_val_results(config, train_dataset, val_dataset, all_results, di
             'Sample_ID': val_ids[:len(res['val_preds'])],
             'Group': [disease_type if l == 1 else 'control' for l in val_true_labels[:len(res['val_preds'])]],
             'Prediction_Score': res['val_preds'],
-            'Dataset': 'EV',
+            'Dataset': 'Test',
             'Model': eng_name,
             'Disease_Type': disease_type
         })
@@ -1519,7 +1519,7 @@ def plot_shap_stability(stability_results, disease_type, output_dir):
 def main():
     parser = argparse.ArgumentParser(description='PTPE Transformer 增强版（含类别不平衡处理）')
     parser.add_argument('--data_path', type=str, default=Config.DATA_PATH,
-                        help='主数据文件路径（含 Training/EV 划分）')
+                        help='主数据文件路径（含 Training/Test 划分）')
     parser.add_argument('--external_path', type=str, default=None,
                         help='外部验证集文件路径（独立数据集）')
     parser.add_argument('--output_dir', type=str, default='./output',
