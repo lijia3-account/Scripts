@@ -1608,7 +1608,7 @@ def main():
 
     # 正式加载数据集
     train_dataset = PTPEDataset(config.DATA_PATH, dataset_type='Training', config=config)
-    val_dataset = PTPEDataset(config.DATA_PATH, dataset_type='EV', config=config)
+    val_dataset = PTPEDataset(config.DATA_PATH, dataset_type='Test', config=config)
     disease_type = train_dataset.disease_type
 
     # 打印类别不平衡处理策略
