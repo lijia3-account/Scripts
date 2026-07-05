@@ -1,0 +1,7 @@
+MAP
+PMH
+BMI
+Age
+Birth_history
+IVF
+RPL
